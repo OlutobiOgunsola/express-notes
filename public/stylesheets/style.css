@@ -1,8 +1,30 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00B7FF;
+  color: #00b7ff;
+}
+
+.navbar {
+  background: rgb(110, 110, 202);
+  color: white;
+  height: 70px;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.navbar ul {
+  list-style-type: none;
+}
+
+.nav-item {
+  float: right;
+  margin: 0px 5px;
+  box-sizing: border-box;
+}
+
+.nav-item a {
+  text-decoration: none;
 }

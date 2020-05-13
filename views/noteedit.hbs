@@ -1,0 +1,65 @@
+<form id='myForm'>
+    <input id='docreate' type='hidden' name='docreate' value='{{docreate}}' />
+    <p>Key:
+        {{#if docreate }}
+        <input type='text' id='noteKey' name='notekey' value='' />
+        {{else}}
+        {{#if note}}<input type='text' id='noteKey' name='notekey' readonly value='{{notekey}}' />{{/if}}
+        {{/if}}
+    </p>
+    <p>Title: <input type='text' id='noteTitle' name='title' value='
+        {{#if note}}{{note.title}}{{/if}}
+    ' /></p>
+    <br />
+    <textarea id='noteBody' rows=5 cols=40 name='body'>
+        {{#if note}}{{note.body}}{{/if}}
+    </textarea>
+    <br />
+    <input type='submit' value='submit' />
+</form>
+
+<script>
+    console.log('Script loaded with changes')
+    const form = document.getElementById('myForm');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const docreate = document.getElementById('docreate').value;
+        console.log(docreate)
+        console.log('Sending Data Now')
+        const noteTitle = document.getElementById('noteTitle').value
+        const noteKey = document.getElementById('noteKey').value
+        const noteBody = document.getElementById('noteBody').value
+
+        const formData = {
+            noteTitle,
+            noteKey,
+            noteBody,
+            docreate: docreate === 'true' ? true : false
+        }
+        if (docreate === 'true') {
+            console.log('Create new note')
+            fetch('/notes/savenote', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/JSON'
+                },
+                body: JSON.stringify(formData)
+            }).then(data => {
+                window.location.href = 'http://localhost:3000/'
+            }
+            )
+        } else {
+            console.log('Edit a note')
+            fetch('/notes/savenote', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/JSON'
+                },
+                body: JSON.stringify(formData)
+            }).then(data => {
+                window.location.href = 'http://localhost:3000/'
+            }
+            )
+        }
+    })
+</script>

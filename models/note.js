@@ -43,4 +43,14 @@ module.exports = class Note {
   set body(newBody) {
     this[notebody] = newBody;
   }
+
+  /** Static json getter
+   * @param {Object} json -Json arg
+   * @returns {Object} note
+   */
+  static fromJSON(json) {
+    const data = JSON.parse(json);
+    const note = new Note(data.key, data.title, data.body);
+    return note;
+  }
 };

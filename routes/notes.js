@@ -59,4 +59,17 @@ router.get('/edit', async (req, res, next) => {
   });
 });
 
+router.get('/destroy', async (req, res, next) => {
+  const note = await notes.read(req.query.key);
+  res.render('notedestroy', {
+    title: note ? note.title : '',
+    notekey: req.query.key,
+    note,
+  });
+});
+
+router.post('/destroyconfirm', async (req, res, next) => {
+  await notes.destroy(req.body.notekey);
+});
+
 module.exports = router;

@@ -1,0 +1,22 @@
+{{#if note}}
+<p>Delete note {{note.title}}??</p>
+<a href=''>Yes</a>
+<a href='../'>Cancel</a>
+{{/if}}
+
+<script>
+    let body = {}
+    body.notekey = note.notekey
+    const deleteNote = () => {
+        fetch('/deleteconfirm', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/JSON'
+            },
+            body: JSON.stringify(body)
+        }).then(data => {
+            console.log(data);
+            window.location.href = 'http://localhost:3000'
+        })
+    }
+</script>
